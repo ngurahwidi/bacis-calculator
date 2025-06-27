@@ -1,5 +1,6 @@
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -43,4 +44,22 @@ button {
 button:hover {
   background-color: black;
   color: white;
+}
+
+body.dark {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+body.dark .calculator {
+  background-color: #333;
+}
+
+body.dark button {
+  background-color: #555;
+  color: white;
+}
+
+body.dark button:hover {
+  background-color: #777;
 }

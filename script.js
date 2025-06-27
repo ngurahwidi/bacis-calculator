@@ -1,7 +1,7 @@
 // Menambahkan angka ke input di html
 function appendValue(value) {
   const display = document.getElementById("display");
-  const operators = ["+", "-", "*", "/"];
+  const operators = ["+", "-", "*", "/", "."];
 
   const lastChar = display.value.slice(-1);
   if (operators.includes(value) && operators.includes(lastChar)) {
@@ -27,6 +27,7 @@ function calculate() {
   const display = document.getElementById("display");
   try {
     let expression = display.value.replace(/(\d+)%/g, "($1/100)");
+    addHistory(display.value, eval(expression));
     display.value = eval(expression);
   } catch (error) {
     alert("Input tidak valid");
@@ -67,5 +68,44 @@ document.addEventListener("keydown", function (event) {
 });
 
 function toggleTheme() {
-  document.body.classList.toggle("dark");
+  const body = document.body;
+  const themeToggleIcon = document
+    .getElementById("themeToggle")
+    .querySelector("i");
+
+  body.classList.toggle("dark");
+
+  if (body.classList.contains("dark")) {
+    themeToggleIcon.classList.remove("fa-moon");
+    themeToggleIcon.classList.add("fa-sun");
+    localStorage.setItem("theme", "dark");
+  } else {
+    themeToggleIcon.classList.remove("fa-sun");
+    themeToggleIcon.classList.add("fa-moon");
+    localStorage.setItem("theme", "light");
+  }
 }
+
+function addHistory(expression, result) {
+  const history = document.getElementById("history");
+  const list = document.createElement("li");
+  list.textContent = `${expression} = ${result}`;
+  history.prepend(list);
+}
+
+window.onload = function () {
+  const savedTheme = localStorage.getItem("theme");
+  const body = document.body;
+  const themeToggleIcon = document
+    .getElementById("themeToggle")
+    .querySelector("i");
+
+  if (savedTheme === "dark") {
+    body.classList.add("dark");
+    themeToggleIcon.classList.remove("fa-moon");
+    themeToggleIcon.classList.add("fa-sun");
+  } else {
+    themeToggleIcon.classList.remove("fa-sun");
+    themeToggleIcon.classList.add("fa-moon");
+  }
+};

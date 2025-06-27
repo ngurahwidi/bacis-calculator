@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Basic Calculator</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
   <body>
-    <button onclick="toggleTheme()" style="margin-bottom: 20px">
-      Toggle Theme
+    <button onclick="toggleTheme()" id="themeToggle">
+      <i class="fas fa-moon"></i>
     </button>
     <div class="calculator">
       <input type="text" id="display" disabled />
@@ -37,6 +41,11 @@
         <button onclick="appendValue('.')">.</button>
         <button onclick="appendValue('%')">%</button>
       </div>
+    </div>
+
+    <div id="history-container">
+      <h3>Riwayat</h3>
+      <ul id="history"></ul>
     </div>
 
     <script src="script.js"></script>
